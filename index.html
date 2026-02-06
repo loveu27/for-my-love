@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy new year, my love.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffd3e0, #ff9a9e);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 1.8rem;
+      padding: 1rem;
+      text-shadow: 1px 1px 2px #e57373;
+      z-index: 2;
+    }
+
+    .prompt {
+      background: #fff0f5;
+      color: #5c3d4d;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 90%;
+      width: 400px;
+      z-index: 3;
+      font-size: 1.1rem;
+    }
+
+    .btns {
+      margin-top: 1rem;
+    }
+
+    .btns button {
+      margin: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff8fa3;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btns button:hover {
+      background-color: #ff6883;
+    }
+
+    .message {
+      color: #d81b60;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .letter {
+      display: none;
+      background: #fff0f5;
+      color: #5c3d4d;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 90%;
+      width: 400px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      text-align: left;
+      overflow-y: auto;
+      max-height: 60vh;
+      margin-top: 2rem;
+      z-index: 3;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff5ca8;
+      transform: rotate(-45deg);
+      animation: float 6s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff5ca8;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .prompt {
+        font-size: 1rem;
+        padding: 1.2rem;
+      }
+
+      .btns button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Vvнийг онгойлгоорой.💖</h1>
+
+ <div class="prompt" id="prompt">
+  <p>Энэ захиаг онгойлгох уу?❤️</p>
+  <div class="btns" id="buttons">
+    <button onclick="openLetter()">Онгойлгох 💌</button>
+  </div>
+</div>
+
+  <div class="letter" id="letter"></div>
+
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="music.mp3" type="audio/mp3" />
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    function showTryAgain() {
+      const msg = document.getElementById('message');
+      msg.style.display = 'block';
+      const noBtn = document.getElementById('noBtn');
+      noBtn.style.display = 'none';
+      setTimeout(() => {
+        msg.style.display = 'none';
+        const buttons = document.getElementById('buttons');
+        buttons.innerHTML = `
+          <button onclick="openLetter()">Yes 💌</button>
+          <button onclick="openLetter()">Yes 💌</button>
+        `;
+      }, 2000);
+    }
+
+    function openLetter() {
+      document.getElementById('prompt').style.display = 'none';
+
+      const music = document.getElementById('bgMusic');
+      if (music && typeof music.play === 'function') {
+        music.play().then(() => {
+          console.log('Music started');
+        }).catch(err => {
+          alert("Tap the screen to enable music 💖");
+        });
+      }
+
+      const letter = document.getElementById('letter');
+      letter.style.display = 'block';
+      letter.innerHTML = `
+        <p>Энэ хорвоогийн хамгийн хөөрхөн чамдаа гэгээн хайрын баярын мэнд хvргэе, чи минь хамгийн мундаг нь шvv.</p>
+        <p>Хэдий хол байгаа ч болгоноо бvтээнээ гээд намайгаа хvлээдэг чамаараа маш их бахархадаг шvv хайр нь. Энэ хугацаанд уурлуулж гомдоож байсан бvх зvйлд минь уучлаарай, хайр нь чамдаа хязгааргvй их хайртай шvv, vнсье.</p>
+        <p>Удахгvй уулзацгаая.🫶❤️</p>
+        <p>Хайрт Тогтохоос нь.❤️</p>
+      `;
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
